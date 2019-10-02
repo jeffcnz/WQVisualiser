@@ -34,3 +34,8 @@ vignettes/*.pdf
 
 # RStudio connection files
 rsconnect/**
+.Rproj.user
+
+#Old files
+
+**/Superceeded

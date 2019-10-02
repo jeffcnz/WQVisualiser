@@ -15,7 +15,7 @@ load("data/HbrcWqSites.RData")
 
 #catchments<-unique(as.character(swQualitySites$ns3.Catchment))
 
-catchments<-sort(unique(swQualitySites$ns3.Catchment))
+catchments<-sort(unique(swQualitySites$Catchment))
 
 
 #measurements<-unique(hbrcwqdata$Measurement)
@@ -47,7 +47,7 @@ shinyUI(fluidPage(theme = "bootstrap.css",
        selectInput("catch",
                    label = "Catchment:",
                    choices = catchments,
-                   selected = "Tukituki"),
+                   selected = "Tukituki River"),
        
        selectInput("meas",
                    label = "Measurement:",
@@ -62,9 +62,9 @@ shinyUI(fluidPage(theme = "bootstrap.css",
        dateRangeInput("dates",
                       label = "Date Range:",
                       start = "2004-01-01",
-                      end = "2014-01-01",
+                      end = "2019-01-01",
                       min = "2004-01-01",
-                      max = "2014-01-01",
+                      max = "2019-01-01",
                       format = "dd-M-yyyy",
                       startview = "decade"
                         ),
@@ -95,7 +95,7 @@ shinyUI(fluidPage(theme = "bootstrap.css",
       tabsetPanel(
        tabPanel("Map", h5(textOutput("maptext"), align = "center"),leafletOutput("map", height=500)),
        tabPanel("Boxplots", h5(textOutput("plottext"), align = "center"), plotOutput("boxPlot", height= 500)),
-       tabPanel("Table", h5(textOutput("tabletext"), align = "center"), dataTableOutput("table")), height = "auto"
+       tabPanel("Table", h5(textOutput("tabletext"), align = "center"), dataTableOutput("table"))#, height = "auto"
       #textOutput("Debugger")
     )
     )

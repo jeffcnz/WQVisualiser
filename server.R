@@ -14,7 +14,7 @@ library(RColorBrewer)
 load("data/HbrcWqData.RData")
 load("data/HbrcWqSites.RData")
 
-mergedData<-merge(hbrcwqdata,swQualitySites, by.x="Site", by.y="ns3.CouncilSiteID")
+mergedData<-merge(hbrcwqdata,swQualitySites, by.x="Site", by.y="CouncilSiteID")
 
 
 shinyServer(function(input, output) {
@@ -26,8 +26,8 @@ shinyServer(function(input, output) {
   
   #reactive expression to filter the data based on user options
   datasubset <- reactive({
-      mergedData[mergedData$ns3.Catchment==input$catch & 
-                   mergedData$Measurement==input$meas & 
+      mergedData[mergedData$Catchment==input$catch & 
+                   mergedData$MeasurementName ==input$meas & 
                    mergedData$Time >= as.POSIXct(input$dates[1]) & 
                    mergedData$Time <= as.POSIXct(input$dates[2]),]
 
@@ -38,13 +38,13 @@ shinyServer(function(input, output) {
     reordered<- reactive({
       tempdf<-datasubset()
       #tempdf<-wrapped()
-      if(input$siteord=="West-East") {tempdf$Site<- factor(tempdf$Site, levels = tempdf$Site[order(tempdf$long, decreasing=FALSE)])
+      if(input$siteord=="West-East") {tempdf$Site<- factor(tempdf$Site, levels = unique(tempdf$Site[order(tempdf$Lon, decreasing=FALSE)]))
         return(tempdf)
-      }else if(input$siteord=="East-West"){tempdf$Site<- factor(tempdf$Site, levels = tempdf$Site[order(tempdf$long, decreasing=TRUE)])
+      }else if(input$siteord=="East-West"){tempdf$Site<- factor(tempdf$Site, levels = unique(tempdf$Site[order(tempdf$Lon, decreasing=TRUE)]))
         return(tempdf)
-      }else if(input$siteord=="North-South"){tempdf$Site<- factor(tempdf$Site, levels = tempdf$Site[order(tempdf$lat, decreasing=FALSE)])
+      }else if(input$siteord=="North-South"){tempdf$Site<- factor(tempdf$Site, levels = unique(tempdf$Site[order(tempdf$Lat, decreasing=FALSE)]))
       return(tempdf)
-      }else{tempdf$Site<- factor(tempdf$Site, levels = tempdf$Site[order(tempdf$lat, decreasing=TRUE)])
+      }else{tempdf$Site<- factor(tempdf$Site, levels = unique(tempdf$Site[order(tempdf$Lat, decreasing=TRUE)]))
       return(tempdf)
       }
     })
@@ -98,7 +98,7 @@ shinyServer(function(input, output) {
     
     #Add locations to the summary information so that the data can be plotted on a map
     summarywithlocation <- reactive({
-      merge(mapsummary(),swQualitySites, by.x="Site", by.y="ns3.CouncilSiteID")
+      merge(mapsummary(),swQualitySites, by.x="Site", by.y="CouncilSiteID")
     })
     
     mapstats<-reactive({
@@ -134,12 +134,15 @@ shinyServer(function(input, output) {
   })
      
   output$boxPlot <- renderPlot({
+    validate(
+      need(length(reordered()$Site) > 0, "No results for that measurement in this area.")
+    )
    #create the boxplot
     #tdf<-reordered()
     #levels(tdf$Site) <- function(levels(tdf$Site),20){as.character(sapply(levels(tdf$Site),FUN=function(x){paste(strwrap(x,width=20), collapse="\n")}))}
     
     #wrapped<-sapply(strwrap(as.character(reordered()$Site), width=25, simplify=FALSE), paste, collapse="\n")
-    #ggplot(wrapped(), aes(Site, result)) +
+    #ggplot(datasubset(), aes(Site, result)) +
     ggplot(reordered() , aes(Site, result)) + 
       geom_boxplot(fill="#b8e186") + 
       xlab("Site") +
@@ -154,13 +157,18 @@ shinyServer(function(input, output) {
   })
   
   output$table <- renderDataTable({
-    
+    validate(
+      need(length(summarydata()$Site) > 0, "No results for that measurement in this area.")
+    )
     format(summarydata(), digits=3)
     
   }, options = list(
     columnDefs = list(list(className = 'dt-center', targets = 5))))
   
   output$map <- renderLeaflet({
+    validate(
+      need(length(summarywithlocation()$Site) > 0, "No results for that measurement in this area.")
+    )
     pal<-binpal()
     st<-mapstats()
     leaflet() %>%
@@ -172,11 +180,11 @@ shinyServer(function(input, output) {
                        popup = paste(summarywithlocation()$Site,"<br/> ",
                                      input$mapstat," ",input$meas," Concentration ",
                                      summarywithlocation()[[st]]," mg/l",sep="")) %>%
-      
-      fitBounds(min(summarywithlocation()$long), 
-                min(summarywithlocation()$lat), 
-                max(summarywithlocation()$long), 
-                max(summarywithlocation()$lat)) %>%
+      clearBounds() %>%
+      #fitBounds(min(summarywithlocation()$Lon), 
+      #          min(summarywithlocation()$Lat), 
+      #          max(summarywithlocation()$Lon), 
+      #          max(summarywithlocation()$Lat)) %>%
       addLegend(position = "bottomright",
                 pal = pal, values = summarywithlocation()[[st]]
       )
