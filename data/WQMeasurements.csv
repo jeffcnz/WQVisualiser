@@ -1,26 +1,26 @@
-Measurements,MeasurementName
-Total Phosphorus,Total Phosphorus
-Dissolved Reactive Phosphorus,Dissolved Reactive Phosphorus
-Ammoniacal Nitrogen,Ammoniacal Nitrogen
-Total Nitrogen,Total Nitrogen
-Nitrite Nitrogen,Nitrite Nitrogen
-Nitrate Nitrogen,Nitrate Nitrogen
-Nitrate + Nitrite Nitrogen,Nitrate + Nitrite Nitrogen
-Total Kjeldahl Nitrogen,Total Kjeldahl Nitrogen
-Total Organic Nitrogen,Total Organic Nitrogen
-Dissolved Inorganic Nitrogen,Dissolved Inorganic Nitrogen
-Suspended Solids [Suspended Solids],Suspended Solids
-Volatile Suspended Solids,Volatile Suspended Solids
-E. Coli,E. Coli
-Faecal Coliforms,Faecal Coliforms
-Turbidity (Lab),Turbidity
-Turbidity (Field),Turbidity
-Dissolved Oxygen [Dissolved Oxygen (X)],Dissolved Oxygen
-Dissolved Oxygen (Saturated) [Dissolved Oxygen (Saturated) (X)],Dissolved Oxygen (Saturated)
-pH (Lab),pH
-pH (Field),pH
-Electrical Conductivity - Field,Electrical Conductivity
-Electrical Conductivity - Lab,Electrical Conductivity
-Black Disc,Black Disc
-Macroinvertebrate Community Index Value[Macroinvertebrate Community Index Value],MCI Value
-Water Temperature (WQ)[Water Temperature (WQ)],Water Temperature
+Measurement,StdMeasurementName,RadiusFactor,BandMin,Band1,Band2,Band3,Band4,BandMax,Brewer_Pallette
+Total Phosphorus,Total Phosphorus,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Dissolved Reactive Phosphorus,Dissolved Reactive Phosphorus,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Ammoniacal Nitrogen,Ammoniacal Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Total Nitrogen,Total Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Nitrite Nitrogen,Nitrite Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Nitrate Nitrogen,Nitrate Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Nitrate + Nitrite Nitrogen,Nitrate + Nitrite Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Total Kjeldahl Nitrogen,Total Kjeldahl Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Total Organic Nitrogen,Total Organic Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Dissolved Inorganic Nitrogen,Dissolved Inorganic Nitrogen,5,0,0.1,0.4,0.8,2,6,RdYlBu
+Suspended Solids [Suspended Solids],Suspended Solids,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Volatile Suspended Solids,Volatile Suspended Solids,5,0,0.05,0.1,0.5,1,2,RdYlBu
+E. Coli,E. Coli,1,0,10,100,200,2000,10000,RdYlBu
+Faecal Coliforms,Faecal Coliforms,1,0,10,100,200,2000,10000,RdYlBu
+Turbidity (Lab),Turbidity,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Turbidity (Field),Turbidity,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Dissolved Oxygen [Dissolved Oxygen (X)],Dissolved Oxygen,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Dissolved Oxygen (Saturated) [Dissolved Oxygen (Saturated) (X)],Dissolved Oxygen (Saturated),5,0,0.05,0.1,0.5,1,2,RdYlBu
+pH (Lab),pH,5,0,4,6,8,10,14,PuOr
+pH (Field),pH,5,0,4,6,8,10,14,PuOr
+Electrical Conductivity - Field,Electrical Conductivity,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Electrical Conductivity - Lab,Electrical Conductivity,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Black Disc,Black Disc,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Macroinvertebrate Community Index Value[Macroinvertebrate Community Index Value],MCI Value,5,0,0.05,0.1,0.5,1,2,RdYlBu
+Water Temperature (WQ)[Water Temperature (WQ)],Water Temperature,5,0,10,15,20,25,30,RdYlBu

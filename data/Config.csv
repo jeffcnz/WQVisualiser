@@ -1,0 +1,7 @@
+Variable,Value
+AppTitle,Surface Water Quality Visualisation
+DefaultCatchment,Tukituki River
+DefaultMeasurement,Total Nitrogen
+DefaultPlotOrder,West-East
+AboutText,"This application is a proof of concept for the public display, interaction and download of data."
+DownloadText,Data is from the State of the Environment monitoring program.
